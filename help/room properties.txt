@@ -1,0 +1,2 @@
+entry/ exit dimensions- x=3m, z=4m, y= 1m
+room dimensions - x= 80m, y= 80m, collision - x 79.5m, y= 79.5m
