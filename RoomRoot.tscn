@@ -81,6 +81,7 @@ mass = 5.0
 transform = Transform( 0.247944, 0, 0, 0, 0.247944, 0, 0, 0, 0.28762, 0, 0, 0 )
 calculate_tangents = false
 mesh = SubResource( 5 )
+material = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Spatial"]
 transform = Transform( 0.247944, 0, 0, 0, 0.247944, 0, 0, 0, 0.28762, 0, 0, 0 )

@@ -15,8 +15,9 @@ func _input(event):
 		mouse = event.position
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == BUTTON_LEFT:
-			getSelection();
-			createIns(spawnPos,spawnNorm);
+			var validClick = getSelection();
+			if validClick:
+				createIns(spawnPos,spawnNorm);
 			
 			
 # Called when the node enters the scene tree for the first time.
@@ -34,8 +35,12 @@ func getSelection():
 	var end = project_position(mouse, 1000);
 	var result = worldSpace.intersect_ray(start, end);
 	print(result);
-	spawnPos = result.position;
-	spawnNorm = result.normal;
+	if !result.empty() :
+		spawnPos = result.position;
+		spawnNorm = result.normal;
+		return true;
+	else:
+		return false;
 	
 func createIns(pos, rot):
 	var newThing = object.instance();
