@@ -4,22 +4,22 @@ extends RigidBody
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var rocketList = [];
+var rocketList: Array = [];
 
-
+func _input(event):
+	if Input.is_action_just_pressed("rocket"):
+		PhysicsServer.set_active(true);
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	pass
 
 func _physics_process(delta):
 		if Input.is_action_pressed("rocket"):
-			print(self.global_transform.basis.y);
 			for rocket in rocketList:
+				var pos = rocket.global_transform.origin;
 				print(rocket);
-				var up = rocket.global_transform.basis.y
-				
-				self.add_force(up * 100,rocket.global_transform.position);
+				var up = rocket.global_transform.basis.y*5;
+				self.add_force(-up * 100, pos);
 			
 
 

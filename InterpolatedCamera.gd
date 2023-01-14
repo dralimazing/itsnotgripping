@@ -31,7 +31,9 @@ func _input(event):
 			
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	PhysicsServer.set_active(false);
 	playerObj = get_tree().root.get_node('RoomRoot/Spatial');
+	
 
 
 
