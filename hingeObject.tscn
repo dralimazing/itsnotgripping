@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="higne" type="ConeTwistJoint"]
+collision/exclude_nodes = false
+softness = 2.86
+relaxation = 2.99

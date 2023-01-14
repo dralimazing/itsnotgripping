@@ -14,12 +14,12 @@ func _input(event):
 
 # Called when the node enters the scene tree for the first time.
 func _process(delta):
-	print(positions);
-	print(normal);
+#	print(positions);
+#	print(normal);
 	positions = get_collision_point();
 	normal = get_collision_normal();
-	get_node("CSGMesh").global_translation = positions;
-	get_node("CSGMesh").global_rotation = normal;
+#	get_node("Spatial").global_translation = positions;
+#	get_node("Spatial").global_rotation = normal;
 	
 	
 func createIns(pos, rot):
