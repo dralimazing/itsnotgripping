@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
-[ext_resource path="res://RayCast.gd" type="Script" id=2]
+[ext_resource path="res://models/3d objects/rocketPreview.tscn" type="PackedScene" id=2]
 [ext_resource path="res://toon.tres" type="Material" id=3]
 [ext_resource path="res://InterpolatedCamera.gd" type="Script" id=4]
+[ext_resource path="res://flyer.gd" type="Script" id=5]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 0.0687856, 1 )
@@ -21,10 +22,9 @@ height = 0.48904
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_energy = 0.5
 
-[sub_resource type="PrismMesh" id=5]
+[sub_resource type="CubeMesh" id=7]
 
-[sub_resource type="BoxShape" id=7]
-margin = 0.1
+[sub_resource type="BoxShape" id=8]
 
 [node name="RoomRoot" type="Spatial"]
 
@@ -53,7 +53,7 @@ mesh = SubResource( 4 )
 material = ExtResource( 3 )
 
 [node name="InterpolatedCamera" type="InterpolatedCamera" parent="KinematicBody"]
-transform = Transform( 0.997277, 0, 0, 0, 0.895131, 0.439663, 0, -0.439663, 0.895131, 0, 1.29457, 2.68376 )
+transform = Transform( 0.997277, 0, 0, 0, 0.63802, 0.766481, 0, -0.766481, 0.63802, 0, 2.46369, 2.10952 )
 current = true
 target = NodePath("..")
 process_mode = 0
@@ -63,26 +63,23 @@ script = ExtResource( 4 )
 transform = Transform( 0.997277, 0, 0, 0, 0.424935, 0.902215, 0, -0.902215, 0.424935, 0, 4.98751, 2.44241 )
 spot_range = 8.80578
 
-[node name="RayCast" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5297, 0 )
-enabled = true
-exclude_parent = false
-cast_to = Vector3( 0, -2.864, 0 )
-script = ExtResource( 2 )
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 6 )
 
 [node name="Spatial" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.736323, 2.25778, 1.32389 )
 mass = 5.0
+script = ExtResource( 5 )
 
 [node name="CSGMesh" type="CSGMesh" parent="Spatial"]
-transform = Transform( 0.247944, 0, 0, 0, 0.247944, 0, 0, 0, 0.28762, 0, 0, 0 )
-calculate_tangents = false
-mesh = SubResource( 5 )
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
+mesh = SubResource( 7 )
 material = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Spatial"]
-transform = Transform( 0.247944, 0, 0, 0, 0.247944, 0, 0, 0, 0.28762, 0, 0, 0 )
-shape = SubResource( 7 )
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
+shape = SubResource( 8 )
+
+[node name="preview" parent="." instance=ExtResource( 2 )]
+
+[connection signal="newRocket" from="KinematicBody/InterpolatedCamera" to="Spatial" method="_on_InterpolatedCamera_newRocket"]
