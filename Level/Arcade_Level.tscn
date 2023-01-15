@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://toon.tres" type="Material" id=1]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Level/Arcade_Level.gd" type="Script" id=3]
+[ext_resource path="res://models/3d objects/rocketPreview.tscn" type="PackedScene" id=4]
+[ext_resource path="res://models/3d objects/rocket.gd" type="Script" id=5]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 0.0687856, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 20, 20, 20 )
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 7.56032, 0, 0, 0, 1, 0, 0, 0, 7.56032, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 1 )
+
+[node name="CSGMesh" type="CSGMesh" parent="StaticBody"]
+transform = Transform( 0.10165, 0, 0, 0, 0.00657013, 0, 0, 0, 0.10165, 0, 0, 0 )
+mesh = SubResource( 2 )
+material = ExtResource( 1 )
+
+[node name="player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17185, 0 )
+
+[node name="preview" parent="." instance=ExtResource( 4 )]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource( 5 )
+Z_SPEED = 21
+Y_SPEED = 22

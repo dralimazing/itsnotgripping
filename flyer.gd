@@ -17,10 +17,8 @@ func _physics_process(delta):
 		if Input.is_action_pressed("rocket"):
 			for rocket in rocketList:
 				var pos = rocket.global_transform.origin;
-				print(rocket);
 				var up = rocket.global_transform.basis.y*5;
-				self.add_force(-up * 100, pos);
-			
+				self.add_force(-up * 10, pos);
 
 
 func _on_InterpolatedCamera_newRocket(rocket):
