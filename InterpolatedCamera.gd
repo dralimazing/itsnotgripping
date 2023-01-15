@@ -6,9 +6,12 @@ var spawnNorm: Vector3 = Vector3();
 
 var object = preload('res://models/3d objects/rocket.tscn');
 var hingeObj = preload("res://hingeObject.tscn");
+var matOk = preload("res://OKpreviewToon.tres");
+var matNo = preload("res://previewToon.tres");
 onready var prevRoc = get_parent().get_parent().get_node("preview");
-var playerObj;
+onready var playerObj =  get_tree().root.get_node('RoomRoot/Spatial');
 signal newRocket(rocket);
+
 
 export var displ: float = 0.1;
 
@@ -21,6 +24,7 @@ func _input(event):
 		prevRoc.global_translation = spawnPos;
 		prevRoc.global_transform=  align_with_y(prevRoc.global_transform, spawnNorm);
 		prevRoc.translate_object_local(Vector3(0, displ ,0));
+	
 		
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == BUTTON_LEFT:
@@ -32,7 +36,7 @@ func _input(event):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	PhysicsServer.set_active(false);
-	playerObj = get_tree().root.get_node('RoomRoot/Spatial');
+	
 	
 
 
@@ -50,7 +54,11 @@ func getSelection():
 	if !result.empty() :
 		spawnPos = result.position;
 		spawnNorm = result.normal;
-		
+		if playerObj.get_instance_id() == result.collider_id:
+			prevRoc.get_node('mesh').set('material/0', matOk);
+		else :
+			prevRoc.get_node('mesh').set('material/0', matNo);
+			return false;
 		return true;
 	else:
 		return false;
