@@ -4,6 +4,8 @@ var mouse = Vector2();
 var spawnPos = Vector3();
 var spawnNorm: Vector3 = Vector3();
 
+var playing = false;
+
 var object = preload('res://models/3d objects/rocket.tscn');
 var hingeObj = preload("res://hingeObject.tscn");
 var matOk = preload("res://OKpreviewToon.tres");
@@ -11,6 +13,9 @@ var matNo = preload("res://previewToon.tres");
 onready var prevRoc = get_parent().get_parent().get_node("preview");
 onready var playerObj =  get_tree().root.get_node('RoomRoot/Spatial');
 signal newRocket(rocket);
+
+onready var cam1 = self;
+onready var cam2 = get_parent().get_parent().get_node("int cam 2nd");
 
 
 export var displ: float = 0.1;
@@ -35,7 +40,9 @@ func _input(event):
 			
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.make_current();
 	PhysicsServer.set_active(false);
+	
 	
 	
 

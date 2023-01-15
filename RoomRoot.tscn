@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://models/3d objects/rocketPreview.tscn" type="PackedScene" id=2]
 [ext_resource path="res://toon.tres" type="Material" id=3]
 [ext_resource path="res://InterpolatedCamera.gd" type="Script" id=4]
 [ext_resource path="res://flyer.gd" type="Script" id=5]
+[ext_resource path="res://int cam 2nd.gd" type="Script" id=6]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 0.0687856, 1 )
@@ -80,6 +81,13 @@ material = ExtResource( 3 )
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 shape = SubResource( 8 )
 
+[node name="camera target" type="Spatial" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, 0.88339, 0.468639, 0, -0.468639, 0.88339, 0, 2.44178, 5.11666 )
+
 [node name="preview" parent="." instance=ExtResource( 2 )]
+
+[node name="int cam 2nd" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.428946, 2.13389, 4.03113 )
+script = ExtResource( 6 )
 
 [connection signal="newRocket" from="KinematicBody/InterpolatedCamera" to="Spatial" method="_on_InterpolatedCamera_newRocket"]
