@@ -4,12 +4,17 @@ var mouse = Vector2();
 var spawnPos = Vector3();
 var spawnNorm: Vector3 = Vector3();
 
+
+onready var roomRoot = get_tree().root.get_node('RoomRoot');
+var currentObj = 'rocket';
 var object = preload('res://models/3d objects/rocket.tscn');
 var hingeObj = preload("res://hingeObject.tscn");
 var matOk = preload("res://OKpreviewToon.tres");
 var matNo = preload("res://previewToon.tres");
+var prevWheel = preload("res://models/3d objects/prevWheel.tscn");
 onready var prevRoc = get_parent().get_parent().get_node("preview");
-onready var playerObj =  get_tree().root.get_node('RoomRoot/Spatial');
+onready var playerObj =  roomRoot.get_node('Spatial');
+
 signal newRocket(rocket);
 
 
@@ -18,6 +23,18 @@ export var displ: float = 0.1;
 
 
 func _input(event):
+	
+	if event is  InputEventKey:
+		if Input.is_action_just_pressed("wheel"):
+			object = load('res://models/3d objects/wheel.tscn');
+			roomRoot.remove_child(prevRoc);
+			var wheelIns = prevWheel.instance();
+			wheelIns.scale = Vector3(0.1,0.1,0.1);
+			roomRoot.add_child(wheelIns);
+			currentObj= 'wheel';
+			prevRoc = wheelIns;
+			
+			
 	if event is InputEventMouse:
 		mouse = event.position
 		var validClick = getSelection();
@@ -67,13 +84,15 @@ func createIns(pos, rot):
 	var newThing = object.instance();
 	var newHinge = hingeObj.instance();
 #	get_tree().root.add_child(newHinge);
-	get_tree().root.get_node('RoomRoot/Spatial').add_child(newThing);
+	roomRoot.add_child(newThing);
 	newThing.global_translation = pos;
 
 	newThing.global_transform=  align_with_y(newThing.global_transform, rot);
 	
 	newThing.scale= Vector3(0.1,0.1,0.1);
 	newThing.translate_object_local(Vector3(0,0.1,0));
+	if currentObj == 'wheel':
+			newThing.get_node('PinJoint').set('nodes/node_a', playerObj.get_path());
 	emit_signal("newRocket", newThing);
 	
 #	newHinge.global_translation = pos;
