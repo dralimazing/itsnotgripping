@@ -17,6 +17,7 @@ func _input(event):
 func _ready():
 	pass
 
+
 #func _physics_process(delta):
 #		if Input.is_action_pressed("rocket"):
 #			for rocket in rocketList:
@@ -25,6 +26,7 @@ func _ready():
 #				var up = rocket.global_transform.basis.y*5;
 #				self.add_force(-up * 100, pos);
 			
+
 
 
 
