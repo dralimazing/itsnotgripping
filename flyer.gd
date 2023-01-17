@@ -1,14 +1,18 @@
 extends RigidBody
 
+onready var cam1 = get_parent().get_node("KinematicBody/InterpolatedCamera");
+onready var cam2 = get_parent().get_node("int cam 2nd");
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 var rocketList: Array = [];
 
-#func _input(event):
-#	if Input.is_action_just_pressed("rocket"):
-#		PhysicsServer.set_active(true);
+func _input(event):
+	if Input.is_action_just_pressed("rocket"):
+		cam1.clear_current();
+		cam2.make_current();
+		PhysicsServer.set_active(true);
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -21,6 +25,7 @@ func _ready():
 #				var up = rocket.global_transform.basis.y*5;
 #				self.add_force(-up * 100, pos);
 			
+
 
 
 func _on_InterpolatedCamera_newRocket(rocket):

@@ -30,6 +30,9 @@ onready var prevObj = initObj;
 
 
 
+onready var cam1 = self;
+onready var cam2 = get_parent().get_parent().get_node("int cam 2nd");
+
 
 export var displ: float = 0.1;
 
@@ -66,8 +69,9 @@ func _input(event):
 			
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	self.make_current();
 	PhysicsServer.set_active(false);
+	
 	
 	
 
