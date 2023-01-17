@@ -29,13 +29,13 @@ ambient_light_energy = 0.5
 
 [node name="RoomRoot" type="Spatial"]
 
-[node name="StaticBody" type="StaticBody" parent="."]
+[node name="floor" type="StaticBody" parent="."]
 transform = Transform( 7.56032, 0, 0, 0, 1, 0, 0, 0, 7.56032, 0, 0, 0 )
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="floor"]
 shape = SubResource( 1 )
 
-[node name="CSGMesh" type="CSGMesh" parent="StaticBody"]
+[node name="CSGMesh" type="CSGMesh" parent="floor"]
 transform = Transform( 0.10165, 0, 0, 0, 0.00657013, 0, 0, 0, 0.10165, 0, 0, 0 )
 mesh = SubResource( 2 )
 material = ExtResource( 3 )
