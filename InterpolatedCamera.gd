@@ -43,7 +43,10 @@ func _input(event):
 	
 	if event is  InputEventKey:
 		if Input.is_action_just_pressed("start"):
+			cam1.clear_current();
+			cam2.make_current();
 			PhysicsServer.set_active(true);
+	
 		if Input.is_action_just_pressed("wheel") && currentObjSt != 'wheel':
 			currentObjSt= 'wheel';
 			changeObject(prevWheel);
