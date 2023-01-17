@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://player.gd" type="Script" id=1]
+
 [ext_resource path="res://models/3d objects/rocketPreview.tscn" type="PackedScene" id=2]
 [ext_resource path="res://toon.tres" type="Material" id=3]
 [ext_resource path="res://InterpolatedCamera.gd" type="Script" id=4]
@@ -41,7 +41,6 @@ material = ExtResource( 3 )
 
 [node name="KinematicBody" type="KinematicBody" parent="."]
 transform = Transform( 1.00273, 0, 0, 0, 1.00273, 0, 0, 0, 1.00273, 0, 0.553334, 0 )
-script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
 transform = Transform( 0.997452, 0, 0, 0, -4.36e-08, -0.997452, 0, 0.997452, -4.36e-08, 0, -0.047558, 0 )

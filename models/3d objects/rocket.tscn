@@ -21,11 +21,13 @@ surfaces/0 = {
 }
 
 [node name="rocket" type="RigidBody"]
+
 script = ExtResource( 2 )
 
 [node name="rocket" type="CollisionShape" parent="."]
 transform = Transform( -0.101791, 1.537e-08, 0, -1.537e-08, -0.101791, 0, 0, 0, 0.101791, 0, 0, 0 )
 shape = SubResource( 2 )
+
 
 [node name="mesh" type="MeshInstance" parent="."]
 transform = Transform( -0.1, 1.50996e-08, 0, -1.50996e-08, -0.1, 0, 0, 0, 0.1, 0, 0, 0 )
