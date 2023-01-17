@@ -3,19 +3,32 @@ extends InterpolatedCamera
 var mouse = Vector2();
 var spawnPos = Vector3();
 var spawnNorm: Vector3 = Vector3();
-
+var mirror = false;
 
 onready var roomRoot = get_tree().root.get_node('RoomRoot');
-var currentObj = 'rocket';
-var object = preload('res://models/3d objects/rocket.tscn');
+
+var currentObjSt = 'rocket';
+
+var rocketObj = preload('res://models/3d objects/rocket.tscn');
+
+var wheelObj = preload("res://models/3d objects/wheel.tscn");
+
 var hingeObj = preload("res://hingeObject.tscn");
+
 var matOk = preload("res://OKpreviewToon.tres");
 var matNo = preload("res://previewToon.tres");
+
 var prevWheel = preload("res://models/3d objects/prevWheel.tscn");
-onready var prevRoc = get_parent().get_parent().get_node("preview");
+var prevRoc = preload("res://models/3d objects/rocketPreview.tscn");
+
+onready var initObj = get_parent().get_parent().get_node("preview");
 onready var playerObj =  roomRoot.get_node('Spatial');
 
-signal newRocket(rocket);
+
+onready var curObj = rocketObj;
+onready var prevObj = initObj;
+
+
 
 
 export var displ: float = 0.1;
@@ -24,23 +37,24 @@ export var displ: float = 0.1;
 
 func _input(event):
 	
+	
 	if event is  InputEventKey:
-		if Input.is_action_just_pressed("wheel"):
-			object = load('res://models/3d objects/wheel.tscn');
-			roomRoot.remove_child(prevRoc);
-			var wheelIns = prevWheel.instance();
-			wheelIns.scale = Vector3(0.1,0.1,0.1);
-			roomRoot.add_child(wheelIns);
-			currentObj= 'wheel';
-			prevRoc = wheelIns;
-			
+		if Input.is_action_just_pressed("start"):
+			PhysicsServer.set_active(true);
+		if Input.is_action_just_pressed("wheel") && currentObjSt != 'wheel':
+			currentObjSt= 'wheel';
+			changeObject(prevWheel);
+		if Input.is_action_just_pressed("rocket") && currentObjSt != 'rocket':
+			currentObjSt = 'rocket';
+			changeObject(prevRoc);
 			
 	if event is InputEventMouse:
 		mouse = event.position
 		var validClick = getSelection();
-		prevRoc.global_translation = spawnPos;
-		prevRoc.global_transform=  align_with_y(prevRoc.global_transform, spawnNorm);
-		prevRoc.translate_object_local(Vector3(0, displ ,0));
+		if prevObj.is_inside_tree():
+			prevObj.global_translation = spawnPos;
+			prevObj.global_transform=  align_with_y(prevObj.global_transform, spawnNorm);
+			prevObj.translate_object_local(Vector3(0, displ ,0));
 	
 		
 	if event is InputEventMouseButton and event.is_pressed():
@@ -52,6 +66,7 @@ func _input(event):
 			
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	PhysicsServer.set_active(false);
 	
 	
@@ -61,6 +76,18 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+func changeObject (newObject: Resource):
+		
+		roomRoot.remove_child(prevObj);
+		var newObjIns = newObject.instance();
+
+		roomRoot.add_child(newObjIns);
+		prevObj = newObjIns;
+		
+		if currentObjSt == 'rocket':
+			curObj = rocketObj;
+		elif currentObjSt == 'wheel':
+			curObj = wheelObj;
 
 func getSelection():
 	var worldSpace = get_world().direct_space_state;
@@ -72,32 +99,36 @@ func getSelection():
 		spawnPos = result.position;
 		spawnNorm = result.normal;
 		if playerObj.get_instance_id() == result.collider_id:
-			prevRoc.get_node('mesh').set('material/0', matOk);
+			prevObj.get_node('mesh').set('material/0', matOk);
 		else :
-			prevRoc.get_node('mesh').set('material/0', matNo);
+			prevObj.get_node('mesh').set('material/0', matNo);
 			return false;
 		return true;
 	else:
 		return false;
 	
 func createIns(pos, rot):
-	var newThing = object.instance();
+	var newThing = curObj.instance();
 	var newHinge = hingeObj.instance();
-#	get_tree().root.add_child(newHinge);
-	roomRoot.add_child(newThing);
+
+	if currentObjSt == 'rocket':
+		playerObj.add_child(newThing);
+	elif currentObjSt == 'wheel':
+		roomRoot.add_child(newThing);
+	
+	playerObj.add_child(newHinge);
 	newThing.global_translation = pos;
 
 	newThing.global_transform=  align_with_y(newThing.global_transform, rot);
-	
-	newThing.scale= Vector3(0.1,0.1,0.1);
+
 	newThing.translate_object_local(Vector3(0,0.1,0));
-	if currentObj == 'wheel':
-			newThing.get_node('PinJoint').set('nodes/node_a', playerObj.get_path());
-	emit_signal("newRocket", newThing);
-	
-#	newHinge.global_translation = pos;
-#	newHinge.set('nodes/node_a', playerObj.get_path());
-#	newHinge.set("nodes/node_b", newThing.get_path());
+#	if currentObj == 'wheel':
+#			newThing.get_node('HingeJoint').set('nodes/node_a', playerObj.get_path());
+
+	newHinge.global_translation = pos;
+	newHinge.get_node("higne").set('nodes/node_a', playerObj.get_path());
+	newHinge.get_node("higne").set("nodes/node_b", newThing.get_path());
+
 	
 func align_with_y(xform, new_y):
 	xform.basis.y = new_y

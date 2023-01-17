@@ -68,6 +68,7 @@ environment = SubResource( 6 )
 
 [node name="Spatial" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.736323, 2.25778, 1.32389 )
+collision_layer = 2
 mass = 5.0
 script = ExtResource( 5 )
 
@@ -81,5 +82,3 @@ transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 shape = SubResource( 8 )
 
 [node name="preview" parent="." instance=ExtResource( 2 )]
-
-[connection signal="newRocket" from="KinematicBody/InterpolatedCamera" to="Spatial" method="_on_InterpolatedCamera_newRocket"]

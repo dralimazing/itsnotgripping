@@ -6,9 +6,9 @@ extends RigidBody
 # var b = "text"
 var rocketList: Array = [];
 
-func _input(event):
-	if Input.is_action_just_pressed("rocket"):
-		PhysicsServer.set_active(true);
+#func _input(event):
+#	if Input.is_action_just_pressed("rocket"):
+#		PhysicsServer.set_active(true);
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
