@@ -1,9 +1,8 @@
-extends Spatial
+extends RigidBody
 
 
 # Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+
 onready var roomRoot = get_tree().root.get_node('RoomRoot');
 onready var flyer = roomRoot.get_node('Spatial');
 
@@ -17,10 +16,10 @@ func _input(event):
 
 func _physics_process(delta):
 	if Input.is_action_pressed("wheel"):
-		var forward = $RigidBody.global_transform.basis.z;
-
-		if $RigidBody/Area.overlaps_body(roomRoot.get_node("floor")):
-			$RigidBody.apply_central_impulse(forward*100);
+		var forward = -self.global_transform.basis.z;
+ 
+		if $CollisionShape/Area.overlaps_body(roomRoot.get_node("floor")):
+			self.apply_central_impulse(forward*1);
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

@@ -8,11 +8,8 @@ onready var cam2 = get_parent().get_node("int cam 2nd");
 # var b = "text"
 var rocketList: Array = [];
 
-func _input(event):
-	if Input.is_action_just_pressed("rocket"):
-		cam1.clear_current();
-		cam2.make_current();
-		PhysicsServer.set_active(true);
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass

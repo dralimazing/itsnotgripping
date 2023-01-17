@@ -25,17 +25,13 @@ func update_pos():
 
 
 func _physics_process(delta):
-	
-	var direction = Vector3.ZERO
-	#print(update_pos())
-	add_force(Vector3(X_SPEED, Y_SPEED , Z_SPEED),  update_pos())
 
+	if Input.is_action_pressed("rocket"):
+		print(self.global_transform.basis.y);
+		var up = self.global_transform.basis.y
+		self.add_force(up * -400,Vector3(0,0,0));
+## Called every frame. 'delta' is the elapsed time since the previous frame.
 
-#func _physics_process(delta):
-#	if Input.is_action_pressed("rocket"):
-#		var up = self.global_transform.basis.y;
-#		self.add_force(up * -750,Vector3(0,0,0));
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
