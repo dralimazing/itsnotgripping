@@ -1,6 +1,8 @@
 extends RigidBody
 
 
+var playing = false;
+
 # Can probably delete this if we dont need to move the main object directly
 export var X_SPEED = 0
 export var Z_SPEED = 0
@@ -25,11 +27,10 @@ func update_pos():
 
 
 func _physics_process(delta):
-
-	if Input.is_action_pressed("rocket"):
-		print(self.global_transform.basis.y);
+	playing = GlobalVar.playing;
+	if Input.is_action_pressed("rocket") and playing:
 		var up = self.global_transform.basis.y
-		self.add_force(up * -400,Vector3(0,0,0));
+		self.add_force(up * -200,Vector3(0,0,0));
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 
 #func _process(delta):

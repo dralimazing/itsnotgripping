@@ -1,6 +1,6 @@
 extends RigidBody
 
-onready var cam1 = get_parent().get_node("KinematicBody/InterpolatedCamera");
+onready var cam1 = get_parent().get_node("cam1 root/InterpolatedCamera");
 onready var cam2 = get_parent().get_node("int cam 2nd");
 
 # Declare member variables here. Examples:

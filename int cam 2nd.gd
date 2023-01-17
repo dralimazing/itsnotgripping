@@ -17,6 +17,11 @@ func _ready():
 #func _process(delta):
 #	pass
 func _physics_process(delta):
-	camTarget.global_translation.y =2.442 ;
+	
+	if camTarget.global_translation.y < 2.442:
+		camTarget.global_translation.y =2.442 ;
+	else:
+		self.global_translation = camTarget.global_translation;
+		
 	self.global_translation = camTarget.global_translation;
 	self.look_at(camLookTarg.global_translation, Vector3.UP);
