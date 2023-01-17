@@ -49,7 +49,7 @@ export var displ: float = 0.1;
 
 
 func _input(event):
-	
+	playing = GlobalVar.playing;	
 	
 	if event is  InputEventKey:
 		
@@ -61,7 +61,7 @@ func _input(event):
 			get_parent().rotation.x -= 0.1;
 		if event.physical_scancode == KEY_S:
 			get_parent().rotation.x += 0.1;
-		if self.global_translation.y <= 0:
+		if self.global_translation.y <= 0 && !playing:
 			roomRoot.get_node('floor').set('visible', false);
 		else:
 			roomRoot.get_node('floor').set('visible', true);
@@ -73,6 +73,7 @@ func _input(event):
 			prevObj.set('visible', false);
 			cam1.clear_current();
 			cam2.make_current();
+			roomRoot.get_node('floor').set('visible', true);
 			PhysicsServer.set_active(true);
 	
 		if Input.is_action_just_pressed("wheel") && currentObjSt != 'wheel' && !playing:
