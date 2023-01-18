@@ -1,15 +1,12 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://int cam 2nd.gd" type="Script" id=1]
 [ext_resource path="res://models/3d objects/rocketPreview.tscn" type="PackedScene" id=2]
 [ext_resource path="res://toon.tres" type="Material" id=3]
 [ext_resource path="res://InterpolatedCamera.gd" type="Script" id=4]
 [ext_resource path="res://flyer.gd" type="Script" id=5]
-[ext_resource path="res://ui/balloonIco.png" type="Texture" id=6]
-[ext_resource path="res://ui/rocketIcon.png" type="Texture" id=7]
-[ext_resource path="res://ui/wheelcon.png" type="Texture" id=8]
-[ext_resource path="res://new_theme.tres" type="Theme" id=9]
-[ext_resource path="res://UI.gd" type="Script" id=10]
+[ext_resource path="res://UI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://end.tscn" type="PackedScene" id=7]
 [ext_resource path="res://trialFloor.tscn" type="PackedScene" id=11]
 [ext_resource path="res://RoomRoot.gd" type="Script" id=12]
 
@@ -24,15 +21,6 @@ ambient_light_sky_contribution = 0.0
 [sub_resource type="CubeMesh" id=7]
 
 [sub_resource type="BoxShape" id=8]
-
-[sub_resource type="StyleBoxFlat" id=9]
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
-
-[sub_resource type="Theme" id=10]
-PanelContainer/styles/panel = SubResource( 9 )
 
 [sub_resource type="BoxShape" id=11]
 extents = Vector3( 200, 1, 200 )
@@ -73,57 +61,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1437, 6.50868 )
 [node name="int cam 2nd" type="Camera" parent="."]
 script = ExtResource( 1 )
 
-[node name="UI" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 10 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 18.0
-margin_top = -241.0
-margin_right = 160.0
-margin_bottom = 193.0
-rect_scale = Vector2( 0.5, 0.5 )
-theme = SubResource( 10 )
-alignment = 2
-
-[node name="rocket panel" type="PanelContainer" parent="UI/VBoxContainer"]
-margin_top = 42.0
-margin_right = 142.0
-margin_bottom = 170.0
-
-[node name="rocketIcon" type="TextureRect" parent="UI/VBoxContainer/rocket panel"]
-margin_right = 142.0
-margin_bottom = 128.0
-texture = ExtResource( 7 )
-
-[node name="balloon panel" type="PanelContainer" parent="UI/VBoxContainer"]
-margin_top = 174.0
-margin_right = 142.0
-margin_bottom = 302.0
-
-[node name="balloonIcon" type="TextureRect" parent="UI/VBoxContainer/balloon panel"]
-margin_right = 142.0
-margin_bottom = 128.0
-texture = ExtResource( 6 )
-
-[node name="wheel panel" type="PanelContainer" parent="UI/VBoxContainer"]
-margin_top = 306.0
-margin_right = 142.0
-margin_bottom = 434.0
-
-[node name="wheelIcon" type="TextureRect" parent="UI/VBoxContainer/wheel panel"]
-margin_right = 142.0
-margin_bottom = 128.0
-theme = ExtResource( 9 )
-texture = ExtResource( 8 )
-
-[node name="Button" type="Button" parent="UI"]
-margin_right = 12.0
-margin_bottom = 20.0
-text = "Restart"
+[node name="UI" parent="." instance=ExtResource( 6 )]
 
 [node name="floor" parent="." instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.65838, -47.0604 )
@@ -142,4 +80,7 @@ light_specular = 0.0
 shadow_enabled = true
 shadow_color = Color( 0.584314, 0.584314, 0.584314, 1 )
 
-[connection signal="pressed" from="UI/Button" to="." method="_on_Button_pressed"]
+[node name="end" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6872, 16.6676, -103.968 )
+
+[connection signal="restart" from="UI" to="." method="_on_UI_restart"]

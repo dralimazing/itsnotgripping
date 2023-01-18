@@ -24,3 +24,8 @@ func _on_Button_pressed():
 	get_tree().reload_current_scene();
 	
 	
+
+
+func _on_UI_restart():
+	GlobalVar.playing = false;
+	get_tree().reload_current_scene();

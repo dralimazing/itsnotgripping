@@ -6,6 +6,8 @@ extends Control
 # var b = "text"
 var active = preload("res://activePanel.tres");
 
+signal restart; 
+
 var playing = GlobalVar.playing;
 
 onready var rocketPanel = $"VBoxContainer/rocket panel";
@@ -52,3 +54,9 @@ func deactivateAllExcept(panel):
 	for x in panelArray:
 		if x != panel:
 			setInactive(x);
+
+
+
+
+func _on_restart_pressed():
+	emit_signal("restart") ;

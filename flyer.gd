@@ -12,16 +12,15 @@ var rocketList: Array = [];
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	$"camera target".set_as_toplevel(true);
 
 
-#func _physics_process(delta):
-#		if Input.is_action_pressed("rocket"):
-#			for rocket in rocketList:
-#				var pos = rocket.global_transform.origin;
-#				print(rocket);
-#				var up = rocket.global_transform.basis.y*5;
-#				self.add_force(-up * 100, pos);
+func _physics_process(delta):
+	$"camera target".global_translation.x = self.global_translation.x;
+	$"camera target".global_translation.z = self.global_translation.z +5;
+	$"camera target".global_translation.y = self.global_translation.y +2;
+	
+	
 			
 
 

@@ -17,6 +17,7 @@ func _input(event):
 func _physics_process(delta):
 	if Input.is_action_pressed("wheel"):
 		var forward = -self.global_transform.basis.z;
+
  
 		if $CollisionShape/Area.overlaps_body(roomRoot.get_node("floor")):
 			self.apply_central_impulse(forward*1);
