@@ -19,6 +19,7 @@ var wheelObj = preload("res://models/3d objects/wheel.tscn");
 
 var balloonObj = preload("res://models/3d objects/balloon.tscn");
 
+var pistonObj = preload("res://models/3d objects/piston.tscn");
 
 
 var hingeObj = preload("res://hingeObject.tscn");
@@ -30,6 +31,7 @@ var matNo = preload("res://previewToon.tres");
 var prevWheel = preload("res://models/3d objects/prevWheel.tscn");
 var prevRoc = preload("res://models/3d objects/rocketPreview.tscn");
 var prevBal = preload("res://models/3d objects/prevBalloon.tscn");
+var prevPist = preload("res://models/3d objects/prevPiston.tscn");
 
 onready var initObj = get_parent().get_parent().get_node("preview");
 onready var playerObj =  roomRoot.get_node('Spatial');
@@ -85,6 +87,9 @@ func _input(event):
 		if Input.is_action_just_pressed("balloon") && currentObjSt != 'balloon' && !playing:
 			currentObjSt = 'balloon';
 			changeObject(prevBal);
+		if Input.is_action_just_pressed("piston") && currentObjSt != 'piston' && !playing:
+			currentObjSt = 'piston';
+			changeObject(prevPist);
 			
 	if event is InputEventMouse and !playing:
 		mouse = event.position
@@ -144,6 +149,8 @@ func changeObject (newObject: Resource):
 			curObj = wheelObj;
 		elif currentObjSt == 'balloon':
 			curObj = balloonObj;
+		elif currentObjSt == 'piston':
+			curObj = pistonObj;
 
 func getSelection():
 	var worldSpace = get_world().direct_space_state;
@@ -169,14 +176,15 @@ func createIns(pos, rot):
 		var newThing = curObj.instance();
 		var newHinge = hingeObj.instance();
 
-		if currentObjSt == 'rocket':
+		if currentObjSt == 'rocket' :
 			playerObj.add_child(newThing);
-		elif currentObjSt == 'wheel':
+		elif currentObjSt == 'wheel'|| currentObjSt == 'piston':
 			roomRoot.add_child(newThing);
 		elif currentObjSt == 'balloon':
 			roomRoot.add_child(newThing);
 		
 		playerObj.add_child(newHinge);
+
 		newThing.global_translation = pos;
 
 		newThing.global_transform=  align_with_y(newThing.global_transform, rot);
@@ -184,10 +192,11 @@ func createIns(pos, rot):
 		newThing.translate_object_local(Vector3(0,0.1,0));
 	#	if currentObj == 'wheel':
 	#			newThing.get_node('HingeJoint').set('nodes/node_a', playerObj.get_path());
-
-		newHinge.global_translation = pos;
-		newHinge.get_node("higne").set('nodes/node_a', playerObj.get_path());
-		newHinge.get_node("higne").set("nodes/node_b", newThing.get_path());
+		if currentObjSt =='wheel' || currentObjSt == 'balloon' || currentObjSt == 'piston':
+	
+			newHinge.global_translation = pos;
+			newHinge.get_node("higne").set('nodes/node_a', playerObj.get_path());
+			newHinge.get_node("higne").set("nodes/node_b", newThing.get_path());
 
 	
 func align_with_y(xform, new_y):

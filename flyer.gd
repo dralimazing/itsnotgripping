@@ -19,9 +19,7 @@ func _physics_process(delta):
 	$"camera target".global_translation.x = self.global_translation.x;
 	$"camera target".global_translation.z = self.global_translation.z +5;
 	$"camera target".global_translation.y = self.global_translation.y +2;
-	
-	
-			
+
 
 
 
