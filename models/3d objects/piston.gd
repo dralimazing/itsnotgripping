@@ -12,7 +12,7 @@ func _ready():
 
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed('piston'):
+	if Input.is_action_just_pressed('piston') && GlobalVar.playing:
 		active = !active;
 		if active:
 			$piston/AnimationPlayer.play("New Anim")

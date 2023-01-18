@@ -156,7 +156,7 @@ func getSelection():
 	var worldSpace = get_world().direct_space_state;
 	var start = project_ray_origin(mouse);
 	var end = project_position(mouse, 1000);
-	var result = worldSpace.intersect_ray(start, end);
+	var result = worldSpace.intersect_ray(start, end,[roomRoot.get_node('floor')]);
 
 	if !result.empty() :
 		spawnPos = result.position;
