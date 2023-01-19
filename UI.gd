@@ -10,10 +10,10 @@ signal restart;
 
 var playing = GlobalVar.playing;
 
-onready var rocketPanel = $"HBoxContainer/icons/rocket panel";
-onready var wheelPanel = $"HBoxContainer/icons/wheel panel";
-onready var balloonPanel = $"HBoxContainer/icons/balloon panel";
-onready var pistonPanel = $"HBoxContainer/icons/piston panel";
+onready var rocketPanel = $"HBoxContainer/icons/rocketIcon";
+onready var wheelPanel = $"HBoxContainer/icons/wheelIcon";
+onready var balloonPanel = $"HBoxContainer/icons/balloonIcon";
+onready var pistonPanel = $"HBoxContainer/icons/pistonIcon";
 
 onready var rocketLab = $"HBoxContainer/labels/rocket panel/rocket";
 onready var wheelLab = $"HBoxContainer/labels/wheel panel/wheel";
@@ -58,10 +58,10 @@ func _input(event):
 		setInactive(pistonPanel);
 		
 func setActive (panel):
-	panel.set('custom_styles/panel', active);
+	panel.set('modulate', 'ffbf00' );
 		
 func setInactive (panel):
-	panel.set('custom_styles/panel', null);
+	panel.set('modulate', 'ffffff' );
 	
 func deactivateAllExcept(panel):
 	for x in panelArray:
@@ -83,4 +83,4 @@ func _on_restart_pressed():
 
 func _on_changeLevel_pressed():
 	GlobalVar.currentLevel == 'menu';
-	get_tree().change_scene("res://mainMenu.tscn");
+	get_tree().change_scene("res://menuScene.tscn");
