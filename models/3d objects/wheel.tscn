@@ -28,7 +28,6 @@ size = Vector3( 1, 1, 1 )
 [node name="wheel" type="RigidBody"]
 collision_layer = 2
 axis_lock_angular_x = true
-axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource( 1 )
 

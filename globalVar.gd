@@ -1,6 +1,7 @@
 extends Node
 
 var playing = false;
+var currentLevel = 'menu';
 
 
 # Called when the node enters the scene tree for the first time.

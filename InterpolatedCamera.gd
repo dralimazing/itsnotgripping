@@ -108,7 +108,10 @@ func _input(event):
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == BUTTON_LEFT:
 			var validClick = getSelection();
-			if validClick:
+			var itemMap: Dictionary = roomRoot.itemMap;
+			var containsKey = itemMap.has(currentObjSt);
+			if validClick && containsKey:
+				itemMap[currentObjSt] -=1;
 				createIns(spawnPos,spawnNorm);
 		if event.button_index == BUTTON_MIDDLE:
 			middleButtonDown = true;
@@ -161,7 +164,12 @@ func getSelection():
 	if !result.empty() :
 		spawnPos = result.position;
 		spawnNorm = result.normal;
-		if playerObj.get_instance_id() == result.collider_id:
+		var itemMap: Dictionary = roomRoot.itemMap;
+		var containsKey = itemMap.has(currentObjSt);
+		var remaining = 0;
+		if containsKey:
+			remaining = itemMap[currentObjSt];
+		if playerObj.get_instance_id() == result.collider_id && containsKey && remaining != 0:
 
 			prevObj.get_node('mesh').set('material/0', matOk);
 		else :
@@ -197,6 +205,8 @@ func createIns(pos, rot):
 			newHinge.global_translation = pos;
 			newHinge.get_node("higne").set('nodes/node_a', playerObj.get_path());
 			newHinge.get_node("higne").set("nodes/node_b", newThing.get_path());
+			if (currentObjSt == 'wheel'):
+				newHinge.get_node("higne").swing_span = 5;
 
 	
 func align_with_y(xform, new_y):

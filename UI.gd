@@ -10,12 +10,19 @@ signal restart;
 
 var playing = GlobalVar.playing;
 
-onready var rocketPanel = $"VBoxContainer/rocket panel";
-onready var wheelPanel = $"VBoxContainer/wheel panel";
-onready var balloonPanel = $"VBoxContainer/balloon panel";
-onready var pistonPanel = $"VBoxContainer/piston panel";
+onready var rocketPanel = $"HBoxContainer/icons/rocket panel";
+onready var wheelPanel = $"HBoxContainer/icons/wheel panel";
+onready var balloonPanel = $"HBoxContainer/icons/balloon panel";
+onready var pistonPanel = $"HBoxContainer/icons/piston panel";
 
-onready var panelArray = [rocketPanel, wheelPanel, balloonPanel];
+onready var rocketLab = $"HBoxContainer/labels/rocket panel/rocket";
+onready var wheelLab = $"HBoxContainer/labels/wheel panel/wheel";
+onready var balloonLab = $"HBoxContainer/labels/balloon panel/balloon";
+onready var pistonLab = $"HBoxContainer/labels/piston panel/piston";
+
+
+onready var panelArray = [rocketPanel, wheelPanel, balloonPanel, pistonPanel];
+onready var lableArray = [rocketLab,wheelLab,balloonLab,pistonLab];
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -61,8 +68,19 @@ func deactivateAllExcept(panel):
 		if x != panel:
 			setInactive(x);
 
-
+func _physics_process(delta):
+	var itemMap = get_parent().itemMap;
+	for lable in lableArray:
+		var lab: Label = lable;
+		lab.text = 'X ' + str(itemMap[lable.get_name()]);
+	
+	
 
 
 func _on_restart_pressed():
 	emit_signal("restart") ;
+
+
+func _on_changeLevel_pressed():
+	GlobalVar.currentLevel == 'menu';
+	get_tree().change_scene("res://mainMenu.tscn");

@@ -3,9 +3,8 @@ extends RigidBody
 onready var cam1 = get_parent().get_node("cam1 root/InterpolatedCamera");
 onready var cam2 = get_parent().get_node("int cam 2nd");
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var torq = 5;
+
 var rocketList: Array = [];
 
 
@@ -19,8 +18,16 @@ func _physics_process(delta):
 	$"camera target".global_translation.x = self.global_translation.x;
 	$"camera target".global_translation.z = self.global_translation.z +5;
 	$"camera target".global_translation.y = self.global_translation.y +2;
+	
+	if GlobalVar.playing && Input.is_key_pressed(KEY_A):
+		add_torque(Vector3(0,torq,0));
 
-
+	if GlobalVar.playing && Input.is_key_pressed(KEY_D):
+		add_torque(Vector3(0,-torq,0));
+	if GlobalVar.playing && Input.is_key_pressed(KEY_W):
+		add_torque(Vector3(torq,0,0));
+	if GlobalVar.playing && Input.is_key_pressed(KEY_S):
+		add_torque(Vector3(-torq,0,0));
 
 
 
