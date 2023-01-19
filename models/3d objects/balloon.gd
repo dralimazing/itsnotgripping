@@ -5,10 +5,10 @@ extends RigidBody
 # var a = 2
 # var b = "text"
 
-
+onready var audio = $AudioStreamPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	audio.play()
 
 func _input(event):
 	if Input.is_action_just_pressed("balloon") && GlobalVar.playing:
@@ -17,6 +17,7 @@ func _input(event):
 		$CSGMesh.visible = false;
 		collision_layer = 3;
 		$Timer.start();
+		audio.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

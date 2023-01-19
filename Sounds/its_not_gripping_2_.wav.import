@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/its_not_gripping_2_.wav-3d214c1a2aaf952d026e75df2f5f6bfd.sample"
+
+[deps]
+
+source_file="res://Sounds/its_not_gripping_2_.wav"
+dest_files=[ "res://.import/its_not_gripping_2_.wav-3d214c1a2aaf952d026e75df2f5f6bfd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

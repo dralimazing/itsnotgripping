@@ -5,17 +5,19 @@ extends RigidBody
 
 onready var roomRoot = get_tree().root.get_node('RoomRoot');
 onready var flyer = roomRoot.get_node('Spatial');
-
+onready var audio = $AudioStreamPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	audio.play()
 
 func _input(event):
 	if event.is_action_pressed ("start"):
+
 		PhysicsServer.set_active(true); 
 
 func _physics_process(delta):
 	if Input.is_action_pressed("wheel"):
+		audio.play()
 		var forward = -self.global_transform.basis.z;
 
  

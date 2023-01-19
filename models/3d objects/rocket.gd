@@ -17,7 +17,11 @@ var mouse = Vector2();
 var mouse_sens = 0.3
 var camera_anglev=0
 var motion;
+onready var audio = $AudioStreamPlayer
 
+
+func _ready():
+	audio.play()
 
 func update_pos():
 	player_pos_x = self.translation.x
@@ -31,6 +35,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("rocket") and playing:
 		var up = self.global_transform.basis.y
 		self.add_force(up * -200,Vector3(0,0,0));
+		audio.play()
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 
 #func _process(delta):
