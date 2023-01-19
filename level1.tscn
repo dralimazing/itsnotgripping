@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://int cam 2nd.gd" type="Script" id=1]
 [ext_resource path="res://models/3d objects/rocketPreview.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://UI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://end.tscn" type="PackedScene" id=7]
 [ext_resource path="res://level1Floor.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Sounds/its_not_gripping_2_.wav" type="AudioStream" id=9]
 [ext_resource path="res://RoomRoot.gd" type="Script" id=12]
 
 [sub_resource type="Environment" id=6]
@@ -84,5 +85,8 @@ shadow_color = Color( 0.584314, 0.584314, 0.584314, 1 )
 
 [node name="end" parent="." instance=ExtResource( 7 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.67777, -4.23904, -58.902 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
 
 [connection signal="restart" from="UI" to="." method="_on_UI_restart"]

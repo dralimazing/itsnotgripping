@@ -5,10 +5,10 @@ extends RigidBody
 # var a = 2
 # var b = "text"
 var active = false;
-
+onready var audio = $AudioStreamPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	audio.play()
 
 
 func _physics_process(delta):
@@ -16,6 +16,7 @@ func _physics_process(delta):
 		active = !active;
 		if active:
 			$piston/AnimationPlayer.play("New Anim")
+			audio.play()
 		else: 
 			$piston/AnimationPlayer.play_backwards("New Anim");
 	

@@ -125,6 +125,7 @@ func _input(event):
 		if event.button_index == BUTTON_WHEEL_DOWN && self.global_translation.distance_to(get_parent().global_translation) < 5:
 			self.translate_object_local(Vector3(0,0,0.2));
 		
+		
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.make_current();

@@ -3,9 +3,10 @@ extends Spatial
 
 var itemMap = {'wheel': 2, 'rocket':1, 'balloon': 3, 'piston': 1};
 
-
+onready var audio = $AudioStreamPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	audio.play()
 	if GlobalVar.currentLevel=='level1':
 		itemMap = {'wheel': 10, 'rocket':10, 'balloon': 10, 'piston': 10};
 	elif GlobalVar.currentLevel == 'level2':
