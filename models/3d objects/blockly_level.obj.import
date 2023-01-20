@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/blockly_level.obj-9df4b2f3c89adc531f7dfa95930e8c76.mesh"
+
+[deps]
+
+files=[ "res://.import/blockly_level.obj-9df4b2f3c89adc531f7dfa95930e8c76.mesh" ]
+
+source_file="res://models/3d objects/blockly_level.obj"
+dest_files=[ "res://.import/blockly_level.obj-9df4b2f3c89adc531f7dfa95930e8c76.mesh", "res://.import/blockly_level.obj-9df4b2f3c89adc531f7dfa95930e8c76.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
