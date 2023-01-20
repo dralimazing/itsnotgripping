@@ -24,3 +24,13 @@ func _on_Button_pressed():
 func _on_hard_level_pressed():
 	GlobalVar.currentLevel= 'level2';
 	get_tree().change_scene("res://RoomRoot.tscn");
+
+
+func _on_level3_pressed():
+	GlobalVar.currentLevel= 'level3';
+	get_tree().change_scene("res://level3.tscn");
+
+
+func _on_level4_pressed():
+	GlobalVar.currentLevel= 'level4';
+	get_tree().change_scene("res://level4.tscn");
