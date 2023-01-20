@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://ui/balloonIcon3d.png" type="Texture" id=1]
 [ext_resource path="res://ui/wheelIcon3d.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://ui/rocketIcon3d.png" type="Texture" id=6]
 [ext_resource path="res://ui/exit.png" type="Texture" id=7]
 [ext_resource path="res://ui/restart.png" type="Texture" id=8]
+[ext_resource path="res://ui/help.png" type="Texture" id=9]
+[ext_resource path="res://ui/helpScreen.png" type="Texture" id=10]
 
 [sub_resource type="StyleBoxFlat" id=9]
 border_width_left = 2
@@ -23,6 +25,20 @@ corner_radius_bottom_left = 18
 [sub_resource type="Theme" id=10]
 PanelContainer/styles/panel = SubResource( 9 )
 VBoxContainer/constants/separation = 4
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.427451, 0.427451, 0.427451, 0.443137 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Theme" id=12]
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
@@ -146,5 +162,42 @@ margin_bottom = 256.0
 rect_scale = Vector2( 0.3, 0.3 )
 texture_normal = ExtResource( 7 )
 
+[node name="helpButton" type="TextureButton" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -162.0
+margin_bottom = 256.0
+rect_scale = Vector2( 0.3, 0.3 )
+texture_normal = ExtResource( 9 )
+
+[node name="helpUI" type="Control" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
+
+[node name="helpBackground" type="Panel" parent="helpUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 11 )
+
+[node name="helpScreen" type="TextureRect" parent="helpUI"]
+theme = SubResource( 12 )
+texture = ExtResource( 10 )
+
+[node name="exitHelp" type="TextureButton" parent="helpUI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -63.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 7 )
+
 [connection signal="pressed" from="Button" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="changeLevel" to="." method="_on_changeLevel_pressed"]
+[connection signal="pressed" from="helpButton" to="." method="_on_helpButton_pressed"]
+[connection signal="pressed" from="helpUI/exitHelp" to="." method="_on_exitHelp_pressed"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://models/3d objects/Lighthouse.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://end.gd" type="Script" id=2]
+[ext_resource path="res://winScreen.tscn" type="PackedScene" id=3]
 
 [sub_resource type="SpatialMaterial" id=16]
 albedo_color = Color( 0.890196, 0.890196, 0.890196, 1 )
@@ -103,5 +104,8 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 21 )
 draw_pass_1 = SubResource( 22 )
+
+[node name="winScreen" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

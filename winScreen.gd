@@ -1,4 +1,4 @@
-extends Spatial
+extends Control
 
 
 # Declare member variables here. Examples:
@@ -7,7 +7,8 @@ extends Spatial
 
 
 # Called when the node enters the scene tree for the first time.
-
+func _ready():
+	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -15,10 +16,7 @@ extends Spatial
 #	pass
 
 
-func _on_Area_body_entered(body: Node):
-	if body.get_name() == 'Spatial':
-#		var enterPos =  body.global_transform.;
-		$Particles.emitting = true;
-		$winScreen.visible = true;
-		PhysicsServer.set_active(false);
-		
+func _on_exit_pressed():
+	visible = false;
+	get_tree().change_scene("res://menuScene.tscn");
+

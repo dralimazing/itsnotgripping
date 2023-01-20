@@ -56,7 +56,9 @@ func _input(event):
 		setInactive(balloonPanel);
 	if Input.is_action_just_released("piston") && playing:
 		setInactive(pistonPanel);
-		
+	
+	if Input.is_key_pressed(KEY_ESCAPE):
+		$helpUI.visible = false;
 func setActive (panel):
 	panel.set('modulate', 'ffbf00' );
 		
@@ -84,3 +86,11 @@ func _on_restart_pressed():
 func _on_changeLevel_pressed():
 	GlobalVar.currentLevel == 'menu';
 	get_tree().change_scene("res://menuScene.tscn");
+
+
+func _on_helpButton_pressed():
+	$helpUI.visible = true;
+
+
+func _on_exitHelp_pressed():
+	$helpUI.visible = false;

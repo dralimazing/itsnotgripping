@@ -19,10 +19,7 @@ func _physics_process(delta):
 #	pass
 
 
-func _on_Button_pressed():
-	reloadScene()
-	
-	
+
 
 
 func _on_UI_restart():

@@ -45,7 +45,7 @@ material/0 = ExtResource( 2 )
 transform = Transform( -1, 1.50996e-07, 8.74228e-08, 1.50996e-07, 1, 1.50996e-07, -8.74228e-08, 1.50996e-07, -1, -3.01992e-07, 0, -1.42109e-14 )
 
 [node name="CollisionShape" type="CollisionShape" parent="CollisionShape/Area"]
-transform = Transform( 1.70133, 0, 0, 0, 1.27935, 0, 0, 0, 1.71426, 0, 0.853187, 0 )
+transform = Transform( 1.70133, 5.87141e-08, 1.42109e-14, -1.33517e-07, 2.21586, 1.89482e-07, -8.52651e-14, 1.4141e-07, 1.71426, 1.52451e-08, 0.853187, 0.174385 )
 shape = SubResource( 3 )
 
 [node name="pointer" type="CSGMesh" parent="."]

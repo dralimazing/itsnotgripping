@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://int cam 2nd.gd" type="Script" id=1]
 [ext_resource path="res://models/3d objects/rocketPreview.tscn" type="PackedScene" id=2]
@@ -22,6 +22,9 @@ ambient_light_sky_contribution = 0.0
 [sub_resource type="CubeMesh" id=7]
 
 [sub_resource type="BoxShape" id=8]
+
+[sub_resource type="BoxShape" id=12]
+extents = Vector3( 0.378, 0.378, 0.378 )
 
 [sub_resource type="BoxShape" id=11]
 extents = Vector3( 200, 1, 200 )
@@ -57,6 +60,11 @@ shape = SubResource( 8 )
 
 [node name="camera target" type="Spatial" parent="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1437, 6.50868 )
+
+[node name="Area" type="Area" parent="Spatial"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spatial/Area"]
+shape = SubResource( 12 )
 
 [node name="preview" parent="." instance=ExtResource( 2 )]
 
