@@ -36,7 +36,7 @@ albedo_color = Color( 0.988235, 0.466667, 0.00784314, 1 )
 next_pass = SubResource( 15 )
 params_cull_mode = 1
 params_grow = true
-params_grow_amount = 0.18
+params_grow_amount = 0.128
 albedo_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="ConcavePolygonShape" id=13]
