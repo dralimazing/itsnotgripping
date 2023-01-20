@@ -89,6 +89,7 @@ func _on_changeLevel_pressed():
 
 
 func _on_helpButton_pressed():
+	
 	$helpUI.visible = true;
 
 

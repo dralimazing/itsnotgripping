@@ -34,7 +34,7 @@ func _physics_process(delta):
 		add_torque(Vector3(-torq,0,0));
 
 	if Input.is_key_pressed(KEY_SPACE) && GlobalVar.playing && $Area.overlaps_body(floorNode):
-		print('breaking');
+
 #		var forward = global_transform.basis.z;
 		add_central_force(-linear_velocity*breakForce);
 		

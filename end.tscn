@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://models/3d objects/Lighthouse.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://end.gd" type="Script" id=2]
 [ext_resource path="res://winScreen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://models/textures/smoke.png" type="Texture" id=4]
 
 [sub_resource type="SpatialMaterial" id=16]
 albedo_color = Color( 0.890196, 0.890196, 0.890196, 1 )
@@ -25,9 +26,8 @@ params_grow_amount = 0.07
 albedo_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="SpatialMaterial" id=18]
-albedo_color = Color( 0.960784, 0.764706, 0.0862745, 1 )
 emission_enabled = true
-emission = Color( 0.984314, 0.815686, 0.458824, 1 )
+emission = Color( 1, 1, 1, 1 )
 emission_energy = 1.0
 emission_operator = 0
 emission_on_uv2 = false
@@ -69,6 +69,38 @@ height = 0.042
 radial_segments = 24
 rings = 10
 
+[sub_resource type="Gradient" id=31]
+offsets = PoolRealArray( 0, 0.666084, 1 )
+colors = PoolColorArray( 0.0957031, 0.0957031, 0.0957031, 1, 0, 0, 0, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=32]
+gradient = SubResource( 31 )
+
+[sub_resource type="Curve" id=29]
+_data = [ Vector2( 0, 0.665909 ), 0.0, 0.0, 0, 0, Vector2( 0.968067, 0.238636 ), -0.453666, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=30]
+curve = SubResource( 29 )
+
+[sub_resource type="ParticlesMaterial" id=26]
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3( 0, -1, 0 )
+scale_curve = SubResource( 30 )
+color_ramp = SubResource( 32 )
+
+[sub_resource type="SpatialMaterial" id=27]
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 4 )
+
+[sub_resource type="QuadMesh" id=28]
+material = SubResource( 27 )
+
 [node name="end" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.48151, -25.8724 )
 script = ExtResource( 2 )
@@ -83,7 +115,6 @@ material/3 = SubResource( 19 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.03712, 0 )
-light_color = Color( 1, 0.917647, 0.0392157, 1 )
 light_energy = 0.693
 light_indirect_energy = 3.428
 omni_range = 9.11004
@@ -107,5 +138,12 @@ draw_pass_1 = SubResource( 22 )
 
 [node name="winScreen" parent="." instance=ExtResource( 3 )]
 visible = false
+
+[node name="light" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.95445, 0 )
+amount = 64
+lifetime = 2.5
+process_material = SubResource( 26 )
+draw_pass_1 = SubResource( 28 )
 
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
