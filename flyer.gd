@@ -43,3 +43,12 @@ func _physics_process(delta):
 
 func _on_InterpolatedCamera_newRocket(rocket):
 	rocketList.append(rocket); # Replace with function body.
+
+
+
+func _on_Area_body_entered(body):
+	var name = body.get_name();
+	if name == 'Spatial':
+		print('triggered');
+		add_central_force(-linear_velocity*breakForce*5);
+		gravity_scale = 0.1;

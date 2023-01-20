@@ -85,6 +85,7 @@ func _on_restart_pressed():
 
 func _on_changeLevel_pressed():
 	GlobalVar.currentLevel == 'menu';
+	GlobalVar.playing == false;
 	get_tree().change_scene("res://menuScene.tscn");
 
 
