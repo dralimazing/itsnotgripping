@@ -17,6 +17,8 @@ func _ready():
 		itemMap = {'wheel': 2, 'rocket':1, 'balloon': 1, 'piston': 1};
 	elif GlobalVar.currentLevel == 'level5':
 		itemMap = {'wheel': 2, 'rocket':2, 'balloon': 4, 'piston': 1};
+	elif GlobalVar.currentLevel == 'level6':
+		itemMap = {'wheel': 2, 'rocket':1, 'balloon': 2, 'piston': 2};
 func _physics_process(delta):
 	if $deathBed.overlaps_body($Spatial) || $Spatial.global_translation.y< -50:
 		reloadScene()

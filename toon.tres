@@ -1,10 +1,10 @@
 [gd_resource type="SpatialMaterial" load_steps=2 format=2]
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=3]
 metallic_specular = 0.0
 
 [resource]
-next_pass = SubResource( 6 )
+next_pass = SubResource( 3 )
 params_diffuse_mode = 4
 params_specular_mode = 3
 params_cull_mode = 1

@@ -39,3 +39,8 @@ func _on_level4_pressed():
 func _on_level5_pressed():
 	GlobalVar.currentLevel= 'level5';
 	get_tree().change_scene("res://level5.tscn");
+
+
+func _on_level6_pressed():
+	GlobalVar.currentLevel= 'level6';
+	get_tree().change_scene("res://level6.tscn");

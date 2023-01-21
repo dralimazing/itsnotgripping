@@ -1,0 +1,106 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://int cam 2nd.gd" type="Script" id=1]
+[ext_resource path="res://models/3d objects/rocketPreview.tscn" type="PackedScene" id=2]
+[ext_resource path="res://toon.tres" type="Material" id=3]
+[ext_resource path="res://InterpolatedCamera.gd" type="Script" id=4]
+[ext_resource path="res://flyer.gd" type="Script" id=5]
+[ext_resource path="res://UI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://end.tscn" type="PackedScene" id=7]
+[ext_resource path="res://models/3d objects/level6.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Sounds/its_not_gripping_2_.wav" type="AudioStream" id=9]
+[ext_resource path="res://gameplayTimer.tscn" type="PackedScene" id=10]
+[ext_resource path="res://RoomRoot.gd" type="Script" id=12]
+
+[sub_resource type="Environment" id=6]
+background_mode = 1
+background_color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+background_energy = 0.0
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.2
+ambient_light_sky_contribution = 0.0
+
+[sub_resource type="CubeMesh" id=7]
+
+[sub_resource type="BoxShape" id=8]
+
+[sub_resource type="BoxShape" id=12]
+extents = Vector3( 0.378, 0.378, 0.378 )
+
+[sub_resource type="BoxShape" id=11]
+extents = Vector3( 200, 1, 200 )
+
+[node name="RoomRoot" type="Spatial"]
+script = ExtResource( 12 )
+
+[node name="cam1 root" type="Spatial" parent="."]
+transform = Transform( 1.00273, 0, 0, 0, 1.00273, 0, 0, 0, 1.00273, 0, 0.553334, 0 )
+
+[node name="InterpolatedCamera" type="Camera" parent="cam1 root"]
+transform = Transform( 0.997277, 0, 0, 0, 0.964798, 0.252443, 0, -0.252443, 0.964798, 0, 1.41082, 2.9796 )
+far = 400.0
+script = ExtResource( 4 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 6 )
+
+[node name="Spatial" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0168576, 0.428026, -0.694387 )
+collision_layer = 2
+mass = 5.0
+script = ExtResource( 5 )
+
+[node name="CSGMesh" type="CSGMesh" parent="Spatial"]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
+mesh = SubResource( 7 )
+material = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Spatial"]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
+shape = SubResource( 8 )
+
+[node name="camera target" type="Spatial" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1437, 6.50868 )
+
+[node name="Area" type="Area" parent="Spatial"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spatial/Area"]
+shape = SubResource( 12 )
+
+[node name="preview" parent="." instance=ExtResource( 2 )]
+
+[node name="int cam 2nd" type="Camera" parent="."]
+far = 400.0
+script = ExtResource( 1 )
+
+[node name="UI" parent="." instance=ExtResource( 6 )]
+
+[node name="deathBed" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -26.5194, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="deathBed"]
+shape = SubResource( 11 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.923097, 0.200109, -0.328402, 0.121528, 0.658401, 0.742791, 0.364859, -0.725579, 0.583449, 0.603306, 11.8783, 7.93744 )
+light_energy = 0.2
+light_indirect_energy = 0.0
+light_specular = 0.0
+shadow_enabled = true
+shadow_color = Color( 0.584314, 0.584314, 0.584314, 1 )
+
+[node name="end" parent="." instance=ExtResource( 7 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.04335, 115.538, -386.236 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -40.0
+
+[node name="gameplayTimer" parent="." instance=ExtResource( 10 )]
+
+[node name="floor" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25172, -7.11967 )
+
+[connection signal="restart" from="UI" to="." method="_on_UI_restart"]
+[connection signal="won" from="end" to="gameplayTimer" method="_on_end_won"]
+[connection signal="timerAtEnd" from="gameplayTimer" to="end" method="_on_gameplayTimer_timerAtEnd"]
