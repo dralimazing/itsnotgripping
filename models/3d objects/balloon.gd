@@ -17,7 +17,8 @@ func _input(event):
 		$CSGMesh.visible = false;
 		collision_layer = 3;
 		$Timer.start();
-		audio.play()
+		if not audio.playing:
+			audio.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

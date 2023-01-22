@@ -35,7 +35,8 @@ func _physics_process(delta):
 	if Input.is_action_pressed("rocket") and playing:
 		var up = self.global_transform.basis.y
 		self.add_force(up * -200,Vector3(0,0,0));
-		audio.play()
+		if not audio.playing:
+			audio.play()
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 
 #func _process(delta):

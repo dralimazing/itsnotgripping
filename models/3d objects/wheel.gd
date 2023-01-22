@@ -17,7 +17,8 @@ func _input(event):
 
 func _physics_process(delta):
 	if Input.is_action_pressed("wheel"):
-		audio.play()
+		if not audio.playing:
+			audio.play()
 		var forward = -self.global_transform.basis.z;
 
  

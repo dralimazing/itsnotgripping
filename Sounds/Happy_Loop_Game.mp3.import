@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Happy_Loop_Game.mp3-e26c6f3c89cdcb7107ab5ad2c93f36c5.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Happy_Loop_Game.mp3"
+dest_files=[ "res://.import/Happy_Loop_Game.mp3-e26c6f3c89cdcb7107ab5ad2c93f36c5.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

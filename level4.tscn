@@ -4,7 +4,7 @@
 [ext_resource path="res://flyer.gd" type="Script" id=2]
 [ext_resource path="res://int cam 2nd.gd" type="Script" id=3]
 [ext_resource path="res://InterpolatedCamera.gd" type="Script" id=4]
-[ext_resource path="res://Sounds/its_not_gripping_2_.wav" type="AudioStream" id=5]
+[ext_resource path="res://Sounds/Purple_Level.mp3" type="AudioStream" id=5]
 [ext_resource path="res://models/3d objects/blockly_level.obj" type="ArrayMesh" id=6]
 [ext_resource path="res://UI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://end.tscn" type="PackedScene" id=8]

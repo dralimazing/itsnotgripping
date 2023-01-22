@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Purple_Level.mp3-9f199b6b9e0debb9a6e3ebe6b8b5ba16.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Purple_Level.mp3"
+dest_files=[ "res://.import/Purple_Level.mp3-9f199b6b9e0debb9a6e3ebe6b8b5ba16.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
