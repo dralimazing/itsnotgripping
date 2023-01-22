@@ -16,7 +16,9 @@ func _physics_process(delta):
 		active = !active;
 		if active:
 			$piston/AnimationPlayer.play("New Anim")
-			audio.play()
+			if not audio.playing:
+				audio.play()
+			
 		else: 
 			$piston/AnimationPlayer.play_backwards("New Anim");
-	
+		
